@@ -1,26 +1,38 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     margin: 0;
+    margin-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Handjet', cursive;
+    font-family: 'Jost', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Varela Round', sans-serif;
+    user-select: none;
 }
 
 #container {
     margin-top: 40px;
     padding: 1rem;
     padding-bottom: 48px;
-    background-color: rgb(90, 90, 90);
-    min-height: 702px;
-    max-height: 702px;
-    min-width: 548px;
-    max-width: 548px;
+    background-color: rgb(70, 70, 70);
+    min-height: 600px;
+    max-height: 600px;
+    min-width: 535px;
+    max-width: 535px;
     display: flex;
     flex-direction: column;
-    border-radius: 2vh;
+    border-radius: 1.5rem;
+    border: 3px solid black;
 }
 
 #name {
-    font-size: 2rem;
+    font-size: 2.5rem;
     color: #F1F1F1;
 }
 
@@ -32,7 +44,7 @@ body {
 #solar {
     display: flex;
     border: 1.5px solid black;
-    margin-right: 8px;
+    margin-right: 7px;
 }
 
 #solar div {
@@ -43,14 +55,22 @@ body {
 }
 
 #display {
-    min-width: 488px;
-    min-height: 120px;
-    background-color: green;
+    display: flex;
+    align-items:flex-end;
+    justify-content: flex-end;
+    font-size: 2.5rem;
+    padding: 1rem;
+    min-width: 482px;
+    max-width: 482px;
+    min-height: 104px;
+    max-height: 104px;
+    background-color: rgb(89, 124, 89);
     margin-top: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 40px;
     border-radius: 1vh;
     margin-right: 8px;
     margin-left: 8px;
+    border: 3px solid black;
 }
 
 #body {
@@ -59,21 +79,37 @@ body {
 }
 
 #body button {
-    min-width: 93.6px;
-    min-height: 118.5px;
-    margin: 8px 8px;
-    border-radius: 1vh;
+    min-width: 92.7px;
+    min-height: 80.5px;
+    margin: 7px 7px;
+    border-radius: .8rem;
     border: none;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    background-color: rgb(209, 207, 207);
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+#body button:active{
+    opacity: 50%;
 }
 
 footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     bottom: 0;
+    margin-bottom: .8rem;
     white-space: nowrap;
+    font-size: 1.8rem;
 }
 
-footer a {
+a {
     text-decoration: none;
     color: black;
+}
+
+a:hover {
+    text-decoration: underline;  
 }
