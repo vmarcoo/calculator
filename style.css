@@ -1,0 +1,79 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#container {
+    margin-top: 40px;
+    padding: 1rem;
+    padding-bottom: 48px;
+    background-color: rgb(90, 90, 90);
+    min-height: 702px;
+    max-height: 702px;
+    min-width: 548px;
+    max-width: 548px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2vh;
+}
+
+#name {
+    font-size: 2rem;
+    color: #F1F1F1;
+}
+
+#above-display{
+    display: flex;
+    justify-content: space-between;
+}
+
+#solar {
+    display: flex;
+    border: 1.5px solid black;
+    margin-right: 8px;
+}
+
+#solar div {
+    background-color: rgb(48, 28, 28);
+    min-width: 30px;
+    min-height: 10px;
+    border: 1px solid black;
+}
+
+#display {
+    min-width: 488px;
+    min-height: 120px;
+    background-color: green;
+    margin-top: 20px;
+    margin-bottom: 16px;
+    border-radius: 1vh;
+    margin-right: 8px;
+    margin-left: 8px;
+}
+
+#body {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#body button {
+    min-width: 93.6px;
+    min-height: 118.5px;
+    margin: 8px 8px;
+    border-radius: 1vh;
+    border: none;
+    font-size: 2rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    white-space: nowrap;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
