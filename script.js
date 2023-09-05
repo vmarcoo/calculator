@@ -110,7 +110,7 @@ function keyboadPressed(keyPressed){
 
     if (keyPressed === "Enter"){
 
-        if (displayDown.textContent === "Error"){
+        if (displayDown.textContent === "Error" || displayDown.textContent === "0"){
             clearScreen()
             return
         }
@@ -153,7 +153,7 @@ function keyboadPressed(keyPressed){
 
 equalsBtn.addEventListener("click", () => {
 
-    if (displayDown.textContent === "Error"){
+    if (displayDown.textContent === "Error" || displayDown.textContent === "0"){
         equalsBtn.blur()
         clearScreen()
         return
@@ -175,6 +175,8 @@ numberBtn.forEach((button) => {
             clearScreen()
             return
         }
+
+        if (button.textContent === "0" && secondNumber === "0"){return}
 
         if (displayDown.textContent === "0"){
             displayDown.textContent = ""

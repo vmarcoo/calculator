@@ -78,6 +78,8 @@ body {
 
 #display-up{
     position: absolute;
+    overflow: hidden;
+    max-width: 482px;
     top: 140px;
     font-size: 1.5rem;
     font-family: 'Handjet', cursive;
