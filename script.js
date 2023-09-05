@@ -154,10 +154,12 @@ function keyboadPressed(keyPressed){
 equalsBtn.addEventListener("click", () => {
 
     if (displayDown.textContent === "Error"){
+        equalsBtn.blur()
         clearScreen()
         return
     }
 
+    equalsBtn.blur()
     evaluateResult()
 })
 
@@ -169,6 +171,7 @@ numberBtn.forEach((button) => {
         }
         
         if (displayDown.textContent === "Error"){
+            button.blur()
             clearScreen()
             return
         }
@@ -176,9 +179,11 @@ numberBtn.forEach((button) => {
         if (displayDown.textContent === "0"){
             displayDown.textContent = ""
             firstNumber = button.textContent
+            button.blur()
             return displayDown.textContent = button.textContent
         }
 
+        button.blur()
         displayDownWrite(button.textContent)
     })
 })
@@ -191,6 +196,7 @@ operatorBtn.forEach((button) => {
 
         if (displayDown.textContent === ""){
             displayDown.textContent = "0"
+            button.blur()
             return
         }
 
@@ -201,6 +207,7 @@ operatorBtn.forEach((button) => {
         }
 
         if (displayDown.textContent === "Error"){
+            button.blur()
             clearScreen()
             return
         }
@@ -215,6 +222,7 @@ operatorBtn.forEach((button) => {
                     evaluateResult()
                     currentOperator = button.textContent
                     displayDown.textContent = result+currentOperator
+                    button.blur()
                     return
                 }
 
@@ -222,9 +230,11 @@ operatorBtn.forEach((button) => {
                 firstNumber = ""
                 secondNumber = ""
                 currentOperator = ""
+                button.blur()
                 return
         }
 
+        button.blur()
         displayDownWrite(button.textContent)
         currentOperator = button.textContent 
     })
@@ -234,24 +244,30 @@ dotBtn.addEventListener("click", ()=>{
     if (displayDown.textContent === "0" || displayDown.textContent === ""){
         displayDown.textContent = ""
         displayDownWrite("0.")
+        dotBtn.blur()
         return
     }
 
     if (firstNumber.includes(".") && secondNumber === "" ||
         firstNumber !== "" && secondNumber.includes(".")){
+        dotBtn.blur()
         return
     }
 
     if (currentMode === "sqrt"){
         clearScreen()
         currentMode = "normal"
+        dotBtn.blur()
         return
     }
+
+    dotBtn.blur()
     displayDownWrite(".")
 })
 
 cBtn.addEventListener("click", ()=>{
     currentMode = "normal"
+    cBtn.blur()
     clearScreen()
     firstNumber = ""
     secondNumber = ""
@@ -261,6 +277,7 @@ cBtn.addEventListener("click", ()=>{
 ceBtn.addEventListener("click", ()=>{
     
     if (displayDown.textContent === "Error"){
+        ceBtn.blur()
         clearScreen()
         return
     }
@@ -289,14 +306,18 @@ ceBtn.addEventListener("click", ()=>{
     if (firstNumber.length+currentOperator.length+secondNumber.length === firstNumber.length){
             currentOperator = ""
         }
+
+    ceBtn.blur()
 })
 
 sqrtBtn.addEventListener("click", ()=>{
 
     if (displayDown.textContent === "0" || displayDown.textContent === ""){
+        sqrtBtn.blur()
         return
     }
 
+    sqrtBtn.blur()
     sqrt(displayDown.textContent)
 })
 
@@ -377,6 +398,7 @@ function calculateResult(num1, op, num2){
     }
 
     if (op === "÷"){ 
+        if (num2 === "0"){return displayDown.textContent = "Error"}
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         divide(num1, num2)
@@ -391,7 +413,7 @@ function calculateResult(num1, op, num2){
 }
 
 function add (x, y){
-    result = Number(x)+Number(y)
+    result = parseFloat((Number(x)+Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -400,7 +422,7 @@ function add (x, y){
 }
 
 function subtract (x, y){
-    result = Number(x)-Number(y)
+    result = parseFloat((Number(x)-Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -409,7 +431,7 @@ function subtract (x, y){
 }
 
 function multiply (x, y){
-    result = Number(x)*Number(y)
+    result = parseFloat((Number(x)*Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -418,7 +440,7 @@ function multiply (x, y){
 }
 
 function divide (x, y){
-    result = Number(x)/Number(y)
+    result = parseFloat((Number(x)/Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -427,7 +449,7 @@ function divide (x, y){
 }
 
 function mod (x, y){
-    result = Number(x)%Number(y)
+    result = parseFloat((Number(x)%Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -436,7 +458,7 @@ function mod (x, y){
 }
 
 function sqrt (x){
-   let operation = parseFloat(Math.sqrt(x).toFixed(8));
+   let operation = parseFloat(Math.sqrt(x).toFixed(11));
    if (!operation) {return displayDown.textContent = "Error"}
    displayDown.textContent = operation
    displayUp.textContent = `√${x}`
