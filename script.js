@@ -156,6 +156,10 @@ function operatorButton(button){
 
 function dotButton(){
     
+    if (displayDown.textContent === "Error") return clearScreen()
+
+    if (displayDown.textContent.length === 12) return
+
     if (displayDown.textContent === "0" || displayDown.textContent === ""){
         displayDown.textContent = ""
         displayWrite("0.")
@@ -201,6 +205,8 @@ function clearEntryButton(){
 }
 
 function squareRootButton(){
+
+    if (displayDown.textContent === "Error") return clearScreen()
 
     if (displayDown.textContent === "0" || displayDown.textContent === "") return
     
@@ -335,7 +341,7 @@ function mod (x, y){
 }
 
 function sqrt (x){
-   let operation = parseFloat(Math.sqrt(x).toFixed(11));
+   let operation = parseFloat(Math.sqrt(x).toFixed(6));
    if (!operation) {return displayDown.textContent = "Error"}
    displayDown.textContent = operation
    displayUp.textContent = `√${x}`
