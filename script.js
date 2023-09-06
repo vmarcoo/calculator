@@ -166,9 +166,10 @@ function dotButton(){
         return
     }
 
-    if (firstNumber.includes(".") && secondNumber === "" ||
-        firstNumber !== "" && secondNumber.includes(".")){
-        return
+    if (firstNumber.includes(".") && secondNumber === "" || firstNumber !== "" && secondNumber.includes(".")) return
+
+    if (firstNumber !== "" && currentOperator !== "" && secondNumber === ""){
+        displayWrite("0")
     }
 
     displayWrite(".")
