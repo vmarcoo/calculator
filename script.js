@@ -1,362 +1,236 @@
-const displayUp = document.querySelector("#display-up");
-const displayDown = document.querySelector("#display-down");
-const numberBtn = document.querySelectorAll("#numberBtn");
-const cBtn = document.querySelector("#cBtn");
-const ceBtn = document.querySelector("#ceBtn");
-const operatorBtn = document.querySelectorAll("#operatorBtn");
-const sqrtBtn = document.querySelector("#sqrtBtn");
-const equalsBtn = document.querySelector("#equalsBtn");
-const dotBtn = document.querySelector("#dotBtn");
+// Global variables------------------------------------------------------------------------------------
+
+const displayUp = document.querySelector("#display-up")
+const displayDown = document.querySelector("#display-down")
+const numberBtn = document.querySelectorAll("#numberBtn")
+const cBtn = document.querySelector("#cBtn")
+const ceBtn = document.querySelector("#ceBtn")
+const operatorBtn = document.querySelectorAll("#operatorBtn")
+const sqrtBtn = document.querySelector("#sqrtBtn")
+const equalsBtn = document.querySelector("#equalsBtn")
+const dotBtn = document.querySelector("#dotBtn")
+const mathOperators = ["+", "-", "*", "/", "%", "−", "×", "÷"]
+const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 let firstNumber = ""
 let currentOperator = ""
 let secondNumber = ""
 let result = ""
-let currentMode = "normal"
 
-window.addEventListener("keydown", (e)=>{keyboadPressed(e.key)})
+// Event listeners---------------------------------------------------------------------------------------
 
-function keyboadPressed(keyPressed){
-
-    if (keyPressed >= 0 && keyPressed <= 9){
-        if (currentMode === "sqrt"){
-            clearScreen();
-            currentMode = "normal"
-        }
-        
-        if (displayDown.textContent === "Error"){
-            clearScreen()
-            return
-        }
-
-        if (displayDown.textContent === "0"){
-            displayDown.textContent = ""
-            firstNumber = keyPressed
-            return displayDown.textContent = keyPressed
-        }
-
-        displayDownWrite(keyPressed)
-    }
-
-    if (keyPressed === "+" || keyPressed === "-" || keyPressed === "*" || keyPressed === "/"){
-        if (keyPressed === "-"){keyPressed = "−"}
-        if (keyPressed === "*"){keyPressed = "×"}
-        if (keyPressed === "/"){keyPressed = "÷"}
-
-        if (currentMode === "sqrt"){
-            currentMode = "normal"
-        }
-
-        if (displayDown.textContent === ""){
-            displayDown.textContent = "0"
-            return
-        }
-
-        if (displayDown.textContent === "0"){
-            firstNumber = "0"
-            currentOperator = keyPressed
-            secondNumber = ""
-        }
-
-        if (displayDown.textContent === "Error"){
-            clearScreen()
-            return
-        }
-
-        if (displayDown.textContent.includes("+") || 
-            displayDown.textContent.includes("−") || 
-            displayDown.textContent.includes("×") || 
-            displayDown.textContent.includes("÷") ||
-            displayDown.textContent.includes("%")){
-            
-                if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
-                    evaluateResult()
-                    currentOperator = keyPressed
-                    displayDown.textContent = result+currentOperator
-                    return
-                }
-
-                displayDown.textContent = "Error"
-                firstNumber = ""
-                secondNumber = ""
-                currentOperator = ""
-                return
-        }
-
-        displayDownWrite(keyPressed)
-        currentOperator = keyPressed 
-    }
-
-    if (keyPressed === "."){
-        
-        if (displayDown.textContent === "0" || displayDown.textContent === ""){
-            displayDown.textContent = ""
-            displayDownWrite("0.")
-            return
-        }
-    
-        if (firstNumber.includes(".") && secondNumber === "" ||
-            firstNumber !== "" && secondNumber.includes(".")){
-            return
-        }
-    
-        if (currentMode === "sqrt"){
-            clearScreen()
-            currentMode = "normal"
-            return
-        }
-        displayDownWrite(".")
-    }
-
-    if (keyPressed === "Enter"){
-
-        if (displayDown.textContent === "Error" || displayDown.textContent === "0"){
-            clearScreen()
-            return
-        }
-
-        evaluateResult()
-    }
-
-    if (keyPressed === "Backspace"){
-        if (displayDown.textContent === "Error"){
-            clearScreen()
-            return
-        }
-    
-        displayDown.textContent = displayDown.textContent.toString().slice(0, -1);
-    
-        if (!displayDown.textContent.includes("+") && 
-            !displayDown.textContent.includes("−") && 
-            !displayDown.textContent.includes("×") && 
-            !displayDown.textContent.includes("÷") &&
-            !displayDown.textContent.includes("%")){
-    
-                firstNumber = displayDown.textContent
-            }
-        
-        if (displayDown.textContent.includes(currentOperator)){
-                
-                secondNumber = displayDown.textContent.toString().slice(firstNumber.length+1)
-            }
-    
-        if (!displayDown.textContent.includes(currentOperator)){
-    
-                currentOperator = ""
-            }
-    
-        if (firstNumber.length+currentOperator.length+secondNumber.length === firstNumber.length){
-                currentOperator = ""
-            } 
-    }
-}
-
-equalsBtn.addEventListener("click", () => {
-
-    if (displayDown.textContent === "Error" || displayDown.textContent === "0"){
-        equalsBtn.blur()
-        clearScreen()
-        return
-    }
-
-    equalsBtn.blur()
-    evaluateResult()
+window.addEventListener("keyup", (e) => {
+    keyboadPressed(e.key)
 })
 
 numberBtn.forEach((button) => {
     button.addEventListener("click", () => {
-        if (currentMode === "sqrt"){
-            clearScreen();
-            currentMode = "normal"
-        }
-        
-        if (displayDown.textContent === "Error"){
-            button.blur()
-            clearScreen()
-            return
-        }
-
-        if (button.textContent === "0" && secondNumber === "0"){return}
-
-        if (displayDown.textContent === "0"){
-            displayDown.textContent = ""
-            firstNumber = button.textContent
-            button.blur()
-            return displayDown.textContent = button.textContent
-        }
-
+        numberButton(button.textContent)
         button.blur()
-        displayDownWrite(button.textContent)
     })
 })
 
 operatorBtn.forEach((button) => {
     button.addEventListener("click", () => {
-        if (currentMode === "sqrt"){
-            currentMode = "normal"
-        }
-
-        if (displayDown.textContent === ""){
-            displayDown.textContent = "0"
-            button.blur()
-            return
-        }
-
-        if (displayDown.textContent === "0"){
-            firstNumber = "0"
-            currentOperator = button.textContent
-            secondNumber = ""
-        }
-
-        if (displayDown.textContent === "Error"){
-            button.blur()
-            clearScreen()
-            return
-        }
-
-        if (displayDown.textContent.includes("+") || 
-            displayDown.textContent.includes("−") || 
-            displayDown.textContent.includes("×") || 
-            displayDown.textContent.includes("÷") ||
-            displayDown.textContent.includes("%")){
-            
-                if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
-                    evaluateResult()
-                    currentOperator = button.textContent
-                    displayDown.textContent = result+currentOperator
-                    button.blur()
-                    return
-                }
-
-                displayDown.textContent = "Error"
-                firstNumber = ""
-                secondNumber = ""
-                currentOperator = ""
-                button.blur()
-                return
-        }
-
+        operatorButton(button.textContent)
         button.blur()
-        displayDownWrite(button.textContent)
-        currentOperator = button.textContent 
     })
 })
 
-dotBtn.addEventListener("click", ()=>{
+dotBtn.addEventListener("click", () => {
+    dotButton()
+    dotBtn.blur()
+})
+
+equalsBtn.addEventListener("click", () => {
+    evaluateResult()
+    equalsBtn.blur()
+})
+
+cBtn.addEventListener("click", ()=>{
+    clearButton()
+    cBtn.blur()
+})
+
+ceBtn.addEventListener("click", ()=>{
+    clearEntryButton()
+    ceBtn.blur()
+})
+
+sqrtBtn.addEventListener("click", ()=>{
+    squareRootButton()
+    sqrtBtn.blur()
+})
+
+// Button functions-----------------------------------------------------------------------------------------
+
+function keyboadPressed (keyPressed) {
+    
+    if (numbers.includes(keyPressed)){
+       numberButton(keyPressed)  
+    }
+
+    if (mathOperators.includes(keyPressed)){
+        operatorButton(keyPressed)
+    }
+
+    if (keyPressed === "."){
+        dotButton()
+    }
+
+    if (keyPressed === "Enter"){
+        evaluateResult()
+    }
+
+    if (keyPressed === "Escape"){
+        clearButton()
+    }
+
+    if (keyPressed === "Backspace"){
+        clearEntryButton()
+    }
+}
+
+function numberButton(button){
+
+    if (displayDown.textContent === "Error") return clearScreen()
+       
+    if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+        clearScreen()
+        firstNumber = ""
+    }
+
+    if (button === "0" && secondNumber === "0") return
+
+    if (displayDown.textContent.length === 12) return
+
+    if (displayDown.textContent === "0"){
+        displayDown.textContent = ""
+        firstNumber = button
+        return displayDown.textContent = button
+    }
+
+    displayWrite(button)
+}
+
+function operatorButton(button){
+
+    if (displayDown.textContent === "Error") return clearScreen()
+    
+    if (button === "-") {button = "−"}
+    if (button === "*") {button = "×"}
+    if (button === "/") {button = "÷"}
+
+    if (displayDown.textContent === ""){
+        displayDown.textContent = "0"
+        return
+    }
+
+    if (displayDown.textContent === "0"){
+        firstNumber = "0"
+        currentOperator = button
+        secondNumber = ""
+    }
+
+    if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
+
+        if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
+            evaluateResult()
+            currentOperator = button
+            displayDown.textContent = result+currentOperator
+            return
+        }
+
+        displayDown.textContent = "Error"
+        firstNumber = ""
+        currentOperator = ""
+        secondNumber = ""  
+        return         
+    }
+
+    displayWrite(button)
+    currentOperator = button
+}
+
+function dotButton(){
+    
     if (displayDown.textContent === "0" || displayDown.textContent === ""){
         displayDown.textContent = ""
-        displayDownWrite("0.")
-        dotBtn.blur()
+        displayWrite("0.")
         return
     }
 
     if (firstNumber.includes(".") && secondNumber === "" ||
         firstNumber !== "" && secondNumber.includes(".")){
-        dotBtn.blur()
         return
     }
 
-    if (currentMode === "sqrt"){
-        clearScreen()
-        currentMode = "normal"
-        dotBtn.blur()
-        return
-    }
+    displayWrite(".")
+}
 
-    dotBtn.blur()
-    displayDownWrite(".")
-})
-
-cBtn.addEventListener("click", ()=>{
-    currentMode = "normal"
-    cBtn.blur()
+function clearButton(){
     clearScreen()
     firstNumber = ""
     secondNumber = ""
     currentOperator = ""
-})
+}
 
-ceBtn.addEventListener("click", ()=>{
+function clearEntryButton(){
     
-    if (displayDown.textContent === "Error"){
-        ceBtn.blur()
-        clearScreen()
-        return
+    if (displayDown.textContent === "Error") return clearScreen()
+
+    if (!mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
+        firstNumber = displayDown.textContent
+    }
+    
+    if (displayDown.textContent.includes(currentOperator)){
+        secondNumber = displayDown.textContent.toString().slice(firstNumber.length+1)
+    }
+
+    if (!displayDown.textContent.includes(currentOperator)){
+        currentOperator = ""
+    }
+
+    if (firstNumber.length+currentOperator.length+secondNumber.length === firstNumber.length){
+        currentOperator = ""
     }
 
     displayDown.textContent = displayDown.textContent.toString().slice(0, -1);
+}
 
-    if (!displayDown.textContent.includes("+") && 
-        !displayDown.textContent.includes("−") && 
-        !displayDown.textContent.includes("×") && 
-        !displayDown.textContent.includes("÷") &&
-        !displayDown.textContent.includes("%")){
+function squareRootButton(){
 
-            firstNumber = displayDown.textContent
-        }
+    if (displayDown.textContent === "0" || displayDown.textContent === "") return
     
-    if (displayDown.textContent.includes(currentOperator)){
-            
-            secondNumber = displayDown.textContent.toString().slice(firstNumber.length+1)
-        }
-
-    if (!displayDown.textContent.includes(currentOperator)){
-
-            currentOperator = ""
-        }
-
-    if (firstNumber.length+currentOperator.length+secondNumber.length === firstNumber.length){
-            currentOperator = ""
-        }
-
-    ceBtn.blur()
-})
-
-sqrtBtn.addEventListener("click", ()=>{
-
-    if (displayDown.textContent === "0" || displayDown.textContent === ""){
-        sqrtBtn.blur()
-        return
-    }
-
-    sqrtBtn.blur()
     sqrt(displayDown.textContent)
-})
+}
 
 function clearScreen(){
     displayDown.textContent = "0"
     displayUp.textContent = ""
 }
 
-function resetScreen(){
-    displayDown.textContent = ""
-    displayUp.textContent = ""
-}
+// Operation functions---------------------------------------------------------------------------------------
 
-function displayDownWrite(button){
+function displayWrite(button){
+
     displayDown.textContent += button
 
-    if (!displayDown.textContent.includes("+") && 
-        !displayDown.textContent.includes("−") && 
-        !displayDown.textContent.includes("×") && 
-        !displayDown.textContent.includes("÷") &&
-        !displayDown.textContent.includes("%")){
+    if (!mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
 
-            firstNumber = displayDown.textContent
-        }
+        firstNumber = displayDown.textContent
+    }
     
-    if (displayDown.textContent.includes("+") || 
-        displayDown.textContent.includes("−") || 
-        displayDown.textContent.includes("×") || 
-        displayDown.textContent.includes("÷") ||
-        displayDown.textContent.includes("%")){
-            
-            secondNumber = displayDown.textContent.toString().slice(firstNumber.length+1)
-        }
+    if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
+
+        secondNumber = displayDown.textContent.toString().slice(firstNumber.length+1)
+    }
 }
 
 function evaluateResult(){
-    if (firstNumber === "" || currentOperator === "" || secondNumber === ""){return}
+    if (displayDown.textContent === "Error" || displayDown.textContent === "0") return clearScreen()
+
+    if (firstNumber === "" || currentOperator === "" || secondNumber === "")return
     
     if (currentOperator === "+"){
         calculateResult(firstNumber, "+", secondNumber)
@@ -410,8 +284,7 @@ function calculateResult(num1, op, num2){
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         mod(num1, num2)
-    }
-        
+    }      
 }
 
 function add (x, y){
@@ -466,5 +339,4 @@ function sqrt (x){
    displayUp.textContent = `√${x}`
    firstNumber = String(operation)
    secondNumber = ""
-   currentMode = "sqrt"
 }
