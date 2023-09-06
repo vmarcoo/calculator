@@ -185,6 +185,8 @@ function clearEntryButton(){
     
     if (displayDown.textContent === "Error") return clearScreen()
 
+    displayDown.textContent = displayDown.textContent.toString().slice(0, -1);
+
     if (!mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
         firstNumber = displayDown.textContent
     }
@@ -201,7 +203,6 @@ function clearEntryButton(){
         currentOperator = ""
     }
 
-    displayDown.textContent = displayDown.textContent.toString().slice(0, -1);
 }
 
 function squareRootButton(){
