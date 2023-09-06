@@ -94,15 +94,15 @@ function keyboadPressed (keyPressed) {
 function numberButton(button){
 
     if (displayDown.textContent === "Error") return clearScreen()
+
+    if (button === "0" && secondNumber === "0") return
+
+    if (displayDown.textContent.length === 12) return
        
     if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
         clearScreen()
         firstNumber = ""
     }
-
-    if (button === "0" && secondNumber === "0") return
-
-    if (displayDown.textContent.length === 12) return
 
     if (displayDown.textContent === "0"){
         displayDown.textContent = ""
@@ -116,6 +116,8 @@ function numberButton(button){
 function operatorButton(button){
 
     if (displayDown.textContent === "Error") return clearScreen()
+
+    if (displayDown.textContent.length === 12) return
     
     if (button === "-") {button = "−"}
     if (button === "*") {button = "×"}
@@ -125,7 +127,7 @@ function operatorButton(button){
         displayDown.textContent = "0"
         return
     }
-
+    
     if (displayDown.textContent === "0"){
         firstNumber = "0"
         currentOperator = button
