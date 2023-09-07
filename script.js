@@ -158,7 +158,7 @@ function operatorButton(button){
 
         if (secondNumber === "-") return
 
-        if (firstNumber !== "" && currentOperator === "÷" && secondNumber === "0" || secondNumber === "0.") return displayDown.textContent = "Error"
+        if (firstNumber !== "" && currentOperator === "÷" && secondNumber === "0" || secondNumber === "0." || secondNumber === "-0" || secondNumber === "-0.") return displayDown.textContent = "Error"
 
         if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
             
@@ -335,7 +335,7 @@ function calculateResult(num1, op, num2){
     }
 
     if (op === "÷"){ 
-        if (num2 === "0" || num2 === "0.") return displayDown.textContent = "Error"
+        if (num2 === "0" || num2 === "0." || num2 === "-0" || num2 === "-0.") return displayDown.textContent = "Error"
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         divide(num1, num2)
