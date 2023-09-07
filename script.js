@@ -121,28 +121,32 @@ function operatorButton(button){
     if (displayDown.textContent === "Error") return clearScreen()
 
     if (displayDown.textContent.length === 12) return
+
+    if (firstNumber === "-") return
     
     if (button === "-") {button = "−"}
     if (button === "*") {button = "×"}
     if (button === "/") {button = "÷"}
 
-    if (displayDown.textContent === ""){
+    if (displayDown.textContent === "" || displayDown.textContent === "0"){
+
+        if (button === "−"){
+            displayDown.textContent = "-"
+            firstNumber = "-"
+            return
+        }
+
         displayDown.textContent = "0"
-        return
-    }
-    
-    if (displayDown.textContent === "0"){
         firstNumber = "0"
         currentOperator = button
         secondNumber = ""
+        return
     }
 
     if (firstNumber.charAt(firstNumber.length - 1) === "."){
         displayDown.textContent = firstNumber.toString().slice(0, -1)
         firstNumber = displayDown.textContent
     }
-
-    if (displayDown.textContent.includes("−") || button === "−") return numberButton("-")
 
     if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
 
@@ -152,6 +156,8 @@ function operatorButton(button){
             displayDown.textContent = result+currentOperator
             return
         }
+        
+        if (button === "−") return numberButton("-")
 
         displayDown.textContent = "Error"
         firstNumber = ""
@@ -176,14 +182,6 @@ function dotButton(){
         return
     }
 
-    if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
-        if (firstNumber !== String(result)){
-            return displayWrite(".")
-        }
-        clearScreen()
-        firstNumber = ""
-    }
-
     if (firstNumber.includes(".") && currentOperator !== "" && secondNumber === "" ){
         displayWrite("0")
     }
@@ -192,6 +190,14 @@ function dotButton(){
 
     if (firstNumber !== "" && currentOperator !== "" && secondNumber === ""){
         displayWrite("0")
+    }
+
+    if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+        if (firstNumber !== String(result)){
+            return displayWrite(".")
+        }
+        clearScreen()
+        firstNumber = ""
     }
 
     displayWrite(".")
@@ -325,7 +331,7 @@ function calculateResult(num1, op, num2){
 }
 
 function add (x, y){
-    result = parseFloat((Number(x)+Number(y)).toFixed(11))
+    result = parseFloat((Number(x)+Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -334,7 +340,7 @@ function add (x, y){
 }
 
 function subtract (x, y){
-    result = parseFloat((Number(x)-Number(y)).toFixed(11))
+    result = parseFloat((Number(x)-Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -352,7 +358,7 @@ function multiply (x, y){
 }
 
 function divide (x, y){
-    result = parseFloat((Number(x)/Number(y)).toFixed(11))
+    result = parseFloat((Number(x)/Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -361,7 +367,7 @@ function divide (x, y){
 }
 
 function mod (x, y){
-    result = parseFloat((Number(x)%Number(y)).toFixed(11))
+    result = parseFloat((Number(x)%Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
