@@ -331,7 +331,7 @@ function calculateResult(num1, op, num2){
 }
 
 function add (x, y){
-    result = parseFloat((Number(x)+Number(y)).toFixed(10))
+    result = parseFloat((Number(x)+Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -340,7 +340,7 @@ function add (x, y){
 }
 
 function subtract (x, y){
-    result = parseFloat((Number(x)-Number(y)).toFixed(10))
+    result = parseFloat((Number(x)-Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -358,7 +358,7 @@ function multiply (x, y){
 }
 
 function divide (x, y){
-    result = parseFloat((Number(x)/Number(y)).toFixed(10))
+    result = parseFloat((Number(x)/Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -367,7 +367,7 @@ function divide (x, y){
 }
 
 function mod (x, y){
-    result = parseFloat((Number(x)%Number(y)).toFixed(10))
+    result = parseFloat((Number(x)%Number(y)).toFixed(11))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
