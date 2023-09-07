@@ -156,7 +156,12 @@ function operatorButton(button){
 
     if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
 
+        if (secondNumber === "-") return
+
+        if (firstNumber !== "" && currentOperator === "÷" && secondNumber === "0" || secondNumber === "0.") return displayDown.textContent = "Error"
+
         if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
+            
             evaluateResult()
             currentOperator = button
             displayDown.textContent = result+currentOperator
@@ -330,7 +335,7 @@ function calculateResult(num1, op, num2){
     }
 
     if (op === "÷"){ 
-        if (num2 === "0"){return displayDown.textContent = "Error"}
+        if (num2 === "0" || num2 === "0.") return displayDown.textContent = "Error"
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         divide(num1, num2)
@@ -345,7 +350,7 @@ function calculateResult(num1, op, num2){
 }
 
 function add (x, y){
-    result = parseFloat((Number(x)+Number(y)).toFixed(11))
+    result = parseFloat((Number(x)+Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -354,7 +359,7 @@ function add (x, y){
 }
 
 function subtract (x, y){
-    result = parseFloat((Number(x)-Number(y)).toFixed(11))
+    result = parseFloat((Number(x)-Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -363,7 +368,7 @@ function subtract (x, y){
 }
 
 function multiply (x, y){
-    result = parseFloat((Number(x)*Number(y)).toFixed(11))
+    result = parseFloat((Number(x)*Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -372,7 +377,7 @@ function multiply (x, y){
 }
 
 function divide (x, y){
-    result = parseFloat((Number(x)/Number(y)).toFixed(11))
+    result = parseFloat((Number(x)/Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
@@ -381,7 +386,7 @@ function divide (x, y){
 }
 
 function mod (x, y){
-    result = parseFloat((Number(x)%Number(y)).toFixed(11))
+    result = parseFloat((Number(x)%Number(y)).toFixed(10))
     firstNumber = String(result)
     currentOperator = ""
     secondNumber = ""
