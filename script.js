@@ -289,6 +289,8 @@ function evaluateResult(){
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "" || secondNumber === "-") return
 
+    if (firstNumber !== "" && currentOperator === "÷" && secondNumber === "0" || secondNumber === "0." || secondNumber === "-0" || secondNumber === "-0.") return displayDown.textContent = "Error"
+
     if (displayDown.textContent.charAt(displayDown.textContent.length - 1) === "."){
         displayDown.textContent = displayDown.textContent.toString().slice(0, -1)   
     }
