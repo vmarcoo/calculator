@@ -140,6 +140,7 @@ function operatorButton(button){
         firstNumber = "0"
         currentOperator = button
         secondNumber = ""
+        displayWrite(button)
         return
     }
 
@@ -193,12 +194,20 @@ function dotButton(){
     }
 
     if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+
+        if (firstNumber === "-" || secondNumber === "-") return displayWrite("0.")
+
         if (firstNumber !== String(result)){
             return displayWrite(".")
         }
+
+        if (firstNumber === "-" || secondNumber === "-") return displayWrite("0.")
+
         clearScreen()
         firstNumber = ""
     }
+
+    if (firstNumber === "-" || secondNumber === "-") return displayWrite("0.")
 
     displayWrite(".")
 }
@@ -268,7 +277,7 @@ function displayWrite(button){
 function evaluateResult(){
     if (displayDown.textContent === "Error" || displayDown.textContent === "0" || displayDown.textContent === "") return clearScreen()
 
-    if (firstNumber === "" || currentOperator === "" || secondNumber === "")return
+    if (firstNumber === "" || currentOperator === "" || secondNumber === "" || secondNumber === "-") return
 
     if (displayDown.textContent.charAt(displayDown.textContent.length - 1) === "."){
         displayDown.textContent = displayDown.textContent.toString().slice(0, -1)   
