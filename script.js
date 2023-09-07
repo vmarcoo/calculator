@@ -142,6 +142,8 @@ function operatorButton(button){
         firstNumber = displayDown.textContent
     }
 
+    if (displayDown.textContent.includes("−") || button === "−") return numberButton("-")
+
     if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
 
         if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
@@ -258,7 +260,7 @@ function displayWrite(button){
 }
 
 function evaluateResult(){
-    if (displayDown.textContent === "Error" || displayDown.textContent === "0") return clearScreen()
+    if (displayDown.textContent === "Error" || displayDown.textContent === "0" || displayDown.textContent === "") return clearScreen()
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "")return
 
@@ -315,6 +317,7 @@ function calculateResult(num1, op, num2){
     }
 
     if (op === "%"){ 
+        if (num2 === "0"){return displayDown.textContent = "Error"}
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         mod(num1, num2)
