@@ -100,6 +100,9 @@ function numberButton(button){
     if (displayDown.textContent.length === 12) return
        
     if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+        if (firstNumber !== String(result)){
+            return displayWrite(button)
+        }
         clearScreen()
         firstNumber = ""
     }
@@ -134,6 +137,11 @@ function operatorButton(button){
         secondNumber = ""
     }
 
+    if (firstNumber.charAt(firstNumber.length - 1) === "."){
+        displayDown.textContent = firstNumber.toString().slice(0, -1)
+        firstNumber = displayDown.textContent
+    }
+
     if (mathOperators.includes(displayDown.textContent.toString().slice(firstNumber.length, firstNumber.length+1))){
 
         if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
@@ -164,6 +172,18 @@ function dotButton(){
         displayDown.textContent = ""
         displayWrite("0.")
         return
+    }
+
+    if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+        if (firstNumber !== String(result)){
+            return displayWrite(".")
+        }
+        clearScreen()
+        firstNumber = ""
+    }
+
+    if (firstNumber.includes(".") && currentOperator !== "" && secondNumber === "" ){
+        displayWrite("0")
     }
 
     if (firstNumber.includes(".") && secondNumber === "" || firstNumber !== "" && secondNumber.includes(".")) return
@@ -241,6 +261,10 @@ function evaluateResult(){
     if (displayDown.textContent === "Error" || displayDown.textContent === "0") return clearScreen()
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "")return
+
+    if (displayDown.textContent.charAt(displayDown.textContent.length - 1) === "."){
+        displayDown.textContent = displayDown.textContent.toString().slice(0, -1)   
+    }
     
     if (currentOperator === "+"){
         calculateResult(firstNumber, "+", secondNumber)
