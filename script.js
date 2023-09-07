@@ -100,9 +100,14 @@ function numberButton(button){
     if (displayDown.textContent.length === 12) return
        
     if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
+
         if (firstNumber !== String(result)){
+
+            if (displayDown.textContent === "0" && button === "0") return
+
             return displayWrite(button)
         }
+        
         clearScreen()
         firstNumber = ""
     }
