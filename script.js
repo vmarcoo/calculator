@@ -158,7 +158,7 @@ function operatorButton(button){
 
         if (secondNumber === "-") return
 
-        if (firstNumber !== "" && currentOperator === "÷" && secondNumber !== "" && Number(secondNumber) === 0){
+        if (firstNumber !== "" && currentOperator === "÷" || currentOperator === "%" && secondNumber !== "" && Number(secondNumber) === 0){
             displayDown.textContent = "Error"
             firstNumber = ""
             currentOperator = ""
@@ -294,7 +294,7 @@ function evaluateResult(){
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "" || secondNumber === "-") return
 
-    if (firstNumber !== "" && currentOperator === "÷" && secondNumber !== "" && Number(secondNumber) === 0) {
+    if (firstNumber !== "" && currentOperator === "÷" || currentOperator === "%" && secondNumber !== "" && Number(secondNumber) === 0) {
 
         displayDown.textContent = "Error"
         firstNumber = ""
@@ -356,7 +356,7 @@ function calculateResult(num1, op, num2){
     }
 
     if (op === "%"){ 
-        if (num2 === "0"){return displayDown.textContent = "Error"}
+        if (num2 === "0" || num2 === "0." || num2 === "-0" || num2 === "-0.") return displayDown.textContent = "Error"
         displayUp.textContent = displayDown.textContent+"="
         displayDown.textContent = ""
         mod(num1, num2)
