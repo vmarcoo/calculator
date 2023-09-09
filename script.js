@@ -158,11 +158,15 @@ function operatorButton(button){
 
         if (secondNumber === "-") return
 
-        if (firstNumber !== "" && currentOperator === "÷" || currentOperator === "%" && secondNumber !== "" && Number(secondNumber) === 0){
+        if (button === "−") return numberButton("-")
+
+        if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || currentOperator === "%"){
+
             displayDown.textContent = "Error"
             firstNumber = ""
             currentOperator = ""
             secondNumber = ""
+            return
         }
 
         if (firstNumber !== "" && secondNumber !== "" && currentOperator !== ""){
@@ -172,14 +176,12 @@ function operatorButton(button){
             displayDown.textContent = result+currentOperator
             return
         }
-        
-        if (button === "−") return numberButton("-")
-
+     
         displayDown.textContent = "Error"
         firstNumber = ""
         currentOperator = ""
-        secondNumber = ""  
-        return         
+        secondNumber = ""
+        return
     }
 
     displayWrite(button)
@@ -294,7 +296,7 @@ function evaluateResult(){
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "" || secondNumber === "-") return
 
-    if (firstNumber !== "" && currentOperator === "÷" || currentOperator === "%" && secondNumber !== "" && Number(secondNumber) === 0) {
+    if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || currentOperator === "%") {
 
         displayDown.textContent = "Error"
         firstNumber = ""
