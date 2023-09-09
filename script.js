@@ -98,6 +98,8 @@ function numberButton(button){
     if (button === "0" && secondNumber === "0") return
 
     if (displayDown.textContent.length === 12) return
+    
+    if (firstNumber !== "" && currentOperator !== "" && secondNumber !== "" && button === "-") return
        
     if (displayUp.textContent !== "" && displayDown.textContent === firstNumber){
 
@@ -158,8 +160,6 @@ function operatorButton(button){
 
         if (secondNumber === "-") return
 
-        if (button === "−") return numberButton("-")
-
         if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "%"){
 
             displayDown.textContent = "Error"
@@ -176,6 +176,8 @@ function operatorButton(button){
             displayDown.textContent = result+currentOperator
             return
         }
+
+        if (button === "−") return numberButton("-")
      
         displayDown.textContent = "Error"
         firstNumber = ""
