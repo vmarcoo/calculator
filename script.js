@@ -160,7 +160,7 @@ function operatorButton(button){
 
         if (button === "−") return numberButton("-")
 
-        if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || currentOperator === "%"){
+        if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "%"){
 
             displayDown.textContent = "Error"
             firstNumber = ""
@@ -296,7 +296,7 @@ function evaluateResult(){
 
     if (firstNumber === "" || currentOperator === "" || secondNumber === "" || secondNumber === "-") return
 
-    if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || currentOperator === "%") {
+    if (firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "÷" || firstNumber !== "" && Number(secondNumber) === 0 && currentOperator === "%") {
 
         displayDown.textContent = "Error"
         firstNumber = ""
