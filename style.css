@@ -9,7 +9,6 @@ body {
     background-color: #F1F1F1;
     margin-bottom: 6.25rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-family: 'Handjet', cursive;
@@ -26,8 +25,6 @@ body {
     background-color: rgb(70, 70, 70);
     height: 37.5rem;
     width: 33.5rem;
-    display: flex;
-    flex-direction: column;
     border-radius: 1.5rem;
 }
 
