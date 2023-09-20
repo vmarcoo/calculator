@@ -128,3 +128,70 @@ a {
 a:hover {
     text-decoration: underline;  
 }
+
+@media (max-width: 600px){
+    
+    body {
+        margin-bottom: 1.95rem;
+    }
+    
+    #container {
+        margin-top: .78rem;
+        padding: .31rem;
+        padding-bottom: .94rem;
+        height: 11.72rem;
+        width: 10.5rem;
+        border-radius: .47rem;
+    }
+    
+    #name {
+        font-size: .78rem;
+    }
+    
+    #solar {
+        margin-right: .14rem;
+    }
+    
+    #solar div {
+        min-width: .56rem;
+        min-height: .19rem;
+        border: .019rem solid black;
+    }
+    
+    #display {
+        gap: .31rem;
+        padding: .31rem;
+        min-width: 9.41rem;
+        min-height: 2rem;
+        margin-top: .39rem;
+        margin-bottom: .625rem;
+        border-radius: .25rem;
+        margin-right: 0.15rem;
+        margin-left: 0.15rem;
+        border: .046rem solid rgb(34, 34, 34);
+    }
+    
+    #display-up{
+        max-width: 9.4rem;
+        top: 2.73rem;
+        font-size: .47rem;
+    }
+    
+    #display-down{
+        font-size: .94rem;
+    }
+    
+    #body button {
+        width: 1.81rem;
+        height: 1.56rem;
+        margin: .13rem .13rem;
+        border-radius: .25rem;
+        font-size: .78rem;
+        border: .047rem solid rgb(34, 34, 34);
+    }
+    
+    footer {
+        margin-bottom: .25rem;
+        font-size: .56rem;
+    }
+}
