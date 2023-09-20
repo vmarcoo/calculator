@@ -182,6 +182,10 @@ a:hover {
     }
     
     #body button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
         width: 1.81rem;
         height: 1.56rem;
         margin: .13rem .13rem;
