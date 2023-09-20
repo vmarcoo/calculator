@@ -1,15 +1,17 @@
 html {
     position: relative;
     min-height: 100%;
+    box-sizing: border-box;
 }
 
 body {
     margin: 0;
     background-color: #F1F1F1;
-    margin-bottom: 100px;
+    margin-bottom: 6.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-family: 'Handjet', cursive;
     font-family: 'Jost', sans-serif;
     font-family: 'Roboto', sans-serif;
@@ -18,18 +20,15 @@ body {
 }
 
 #container {
-    margin-top: 40px;
+    margin-top: 2.5rem;
     padding: 1rem;
-    padding-bottom: 48px;
+    padding-bottom: 3rem;
     background-color: rgb(70, 70, 70);
-    min-height: 600px;
-    max-height: 600px;
-    min-width: 535px;
-    max-width: 535px;
+    height: 37.5rem;
+    width: 33.5rem;
     display: flex;
     flex-direction: column;
     border-radius: 1.5rem;
-    border: 3px solid black;
 }
 
 #name {
@@ -44,15 +43,14 @@ body {
 
 #solar {
     display: flex;
-    border: 1.5px solid black;
-    margin-right: 7px;
+    margin-right: .44rem;
 }
 
 #solar div {
     background-color: rgb(48, 28, 28);
-    min-width: 30px;
-    min-height: 10px;
-    border: 1px solid black;
+    min-width: 1.875rem;
+    min-height: .625rem;
+    border: .0625rem solid black;
 }
 
 #display {
@@ -62,25 +60,23 @@ body {
     justify-content: flex-end;
     gap: 1rem;
     padding: 1rem;
-    min-width: 482px;
-    max-width: 482px;
-    min-height: 104px;
-    max-height: 104px;
+    min-width: 30.125rem;
+    min-height: 6.5rem;
     background-color: rgb(89, 124, 89);
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border-radius: 1vh;
-    margin-right: 8px;
-    margin-left: 8px;
-    border: 3px solid black;
+    margin-top: 1.25rem;
+    margin-bottom: 2rem;
+    border-radius: .8rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border: .15rem solid rgb(34, 34, 34);
     overflow: hidden;
 }
 
 #display-up{
     position: absolute;
     overflow: hidden;
-    max-width: 482px;
-    top: 140px;
+    max-width: 30.125rem;
+    top: 8.75rem;
     font-size: 1.5rem;
     font-family: 'Handjet', cursive;
     font-family: 'Orbitron', sans-serif;
@@ -98,14 +94,13 @@ body {
 }
 
 #body button {
-    min-width: 92.7px;
-    min-height: 80.5px;
-    margin: 7px 7px;
+    width: 5.8rem;
+    height: 5rem;
+    margin: .43rem .43rem;
     border-radius: .8rem;
-    border: none;
     font-size: 2.5rem;
     background-color: rgb(209, 207, 207);
-    border: 2px solid black;
+    border: .15rem solid rgb(34, 34, 34);
     cursor: pointer;
 }
 
