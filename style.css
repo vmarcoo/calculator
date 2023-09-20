@@ -181,11 +181,21 @@ a:hover {
         font-size: .94rem;
     }
     
+    #body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        text-decoration: none;
+    }
+
     #body button {
         display: flex;
         align-items: center;
         justify-content: center;
         color: black;
+        text-decoration: none;
         width: 1.81rem;
         height: 1.56rem;
         margin: .13rem .13rem;
